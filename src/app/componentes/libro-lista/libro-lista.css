@@ -1,0 +1,14 @@
+:host {
+    display: block;
+}
+
+.page-head {
+    background: #f8b32b;
+    color: #000;
+}
+
+.page-head h1 {
+    font-size: 2.25em;
+    line-height: 1.1;
+    margin: 0;
+}
