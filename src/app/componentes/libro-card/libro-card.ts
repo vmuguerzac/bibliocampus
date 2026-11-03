@@ -10,7 +10,7 @@ export class LibroCard {
   titulo:string = "Clean Code Rev";
   autor:string = "Robert C. Martin";
   anio:number = 2008;
-  copias = signal(3);
+  copias = signal(2);
   categoria = "Buenas prácticas";
 
   protected agotado = computed(() => this.copias() === 0);
@@ -19,7 +19,8 @@ export class LibroCard {
   );
 
   protected alSolicitar():void {
-    this.copias.update((c) => c + 1 )
+    this.copias.update((c) => c - 1 )
+    console.log("El nuevo valor de copias es: " + this.copias());
   }
 
 

@@ -1,14 +1,36 @@
 <header class="page-head">
     <div class="container py-5">
-        <p class="eyebrow mb-3">
-            Biblioteca universitaria
-        </p>
-        <h1>Catálogo de Libros</h1>
-        <p class="on-y fs-5 mb-0 mt-2">
-            Explora el catálogo y solicita tu préstamo
-        </p>
+        <div class="row align-items-end g-4">
+            <div class="col-lg-6">
+                <p class="eyebrow mb-3">
+                   Biblioteca universitaria
+                </p>
+                <h1>Catálogo de Libros</h1>
+                <p class="on-y fs-5 mb-0 mt-2">
+                    Explora el catálogo y solicita tu préstamo
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <div class="search-bar" role="search">
+                    <label class="visually-hidden" for="q">
+                        Buscar por titulo o autor
+                    </label>
+                    <input id="q"
+                        type="search" class="form-control"
+                        placeholder="Buscar título o autor"
+                        (input)="alEscribir($event)"
+                        (keyup.enter)="alBuscar()"
+                    >
+                    <button class="btn btn-dark px-4" type="button"
+                        (click)="alBuscar()">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
+
 <main class="container">
     <div class="row">
         <div class="col">

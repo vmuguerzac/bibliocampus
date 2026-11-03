@@ -12,3 +12,19 @@
     line-height: 1.1;
     margin: 0;
 }
+
+.search-bar {
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.4rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.search-bar .form-control {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  padding-left: 0.75rem;
+}
