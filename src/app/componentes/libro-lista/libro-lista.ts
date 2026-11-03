@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { LibroCard } from '../libro-card/libro-card';
+import { Libro } from '../../modelos/libro';
+import { LIBROS } from '../../data/libros';
 
 @Component({
   selector: 'app-libro-lista',
@@ -8,8 +10,19 @@ import { LibroCard } from '../libro-card/libro-card';
   styleUrl: './libro-lista.css',
 })
 export class LibroLista {
+  protected libros = signal<Libro[]>(LIBROS);
   protected terminoBusqueda = signal('');
   protected borrador = signal('');
+
+  protected librosVisibles = computed(()=>{
+    const temp = this.terminoBusqueda().toLowerCase();
+    
+    return this.libros().filter(
+      (libro) => !temp || 
+        libro.titulo.toLowerCase().includes(temp) || 
+        libro.autor.toLowerCase().includes(temp)
+    )
+  });
 
   protected alEscribir(evento:Event):void {
     this.borrador.set((evento.target as HTMLInputElement).value);
