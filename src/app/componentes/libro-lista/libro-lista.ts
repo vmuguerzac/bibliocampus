@@ -10,7 +10,7 @@ import { LIBROS } from '../../data/libros';
   styleUrl: './libro-lista.css',
 })
 export class LibroLista {
-  protected libros = signal<Libro[]>(LIBROS);
+  protected libros = signal<Libro[]>(LIBROS); // Data de libros
   protected terminoBusqueda = signal('');
   protected borrador = signal('');
 
@@ -30,5 +30,13 @@ export class LibroLista {
   
   protected alBuscar():void {
     this.terminoBusqueda.set(this.borrador().trim());
+  }
+
+  protected alSolicitar(libro:Libro):void {
+    // Actualizar las copias disponibles
+    this.libros.update((lista) => 
+      lista.map((l) => 
+        l.id === libro.id?{...l, copiasDisponibles: l.copiasDisponibles - 1}:l,
+      ));
   }
 }

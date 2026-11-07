@@ -33,16 +33,13 @@
 
 <main class="container py-5">
     <h2 class="fs-6 fw-bold mb-3">Mostrando {{librosVisibles().length}} libros</h2>
-    @for(l of librosVisibles(); track l.id){
-        <p>
-            <strong>{{l.titulo}}</strong> - {{l.autor}}
-            @if(l.copiasDisponibles > 0){
-                <span class="pill pill-ok">Disponible</span>
-            }@else {
-                <span class="pill pill-no">Agotado</span>
-            }
-        </p>
-    }@empty {
-        <p class="muted">No se encontraron libros con estos criterios</p>
-    }
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @for(l of librosVisibles(); track l.id){
+            <div class="col">
+                <app-libro-card [libro]="l" (prestamoSolicitado)="alSolicitar($event)"></app-libro-card>
+            </div>
+        }@empty {
+            <p class="muted">No se encontraron libros con estos criterios</p>
+        }
+    </div>
 </main>

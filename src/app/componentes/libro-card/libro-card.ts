@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
+import { Libro } from '../../modelos/libro';
 
 @Component({
   selector: 'app-libro-card',
@@ -7,20 +8,18 @@ import { Component, computed, signal } from '@angular/core';
   styleUrl: './libro-card.css',
 })
 export class LibroCard {
-  titulo:string = "Clean Code Rev";
-  autor:string = "Robert C. Martin";
-  anio:number = 2008;
-  copias = signal(2);
-  categoria = "Buenas prácticas";
+  // Comunicacion Padre -> Hijo
+  libro = input.required<Libro>();
+  // Comunicacion Hijo -> Padre
+  prestamoSolicitado = output<Libro>();
 
-  protected agotado = computed(() => this.copias() === 0);
+  protected agotado = computed(() => this.libro().copiasDisponibles === 0);
   protected etiqueta = computed(()=>
-    this.agotado() ? 'Agotado':`Dispobile · ${this.copias()} ${this.copias() === 1? 'copia':'copias'}`
+    this.agotado() ? 'Agotado':`Dispobile · ${this.libro().copiasDisponibles} ${this.libro().copiasDisponibles === 1? 'copia':'copias'}`
   );
 
-  protected alSolicitar():void {
-    this.copias.update((c) => c - 1 )
-    console.log("El nuevo valor de copias es: " + this.copias());
+  protected alSolicitarHijo():void {
+    this.prestamoSolicitado.emit(this.libro());
   }
 
 
