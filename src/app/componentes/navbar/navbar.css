@@ -42,3 +42,13 @@
   padding: 0.35rem 0.55rem;
   border-radius: 6px;
 }
+
+.badge-count {
+  display: inline-block;
+  background: #000;
+  color: #f8b32b;
+  border: 1px solid #f8b32b;
+  font: 700 0.6875rem/1 'Montserrat', 'Inter', sans-serif;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+}

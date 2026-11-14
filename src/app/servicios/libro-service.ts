@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 export class LibroService {
   // Copia del arreglo original de libros
   private libros:Libro[] = LIBROS.map((l) => ({...l})); 
+  
 
   // listar
   listar(terminoBusqueda:string = ''):Observable<Libro[]>{

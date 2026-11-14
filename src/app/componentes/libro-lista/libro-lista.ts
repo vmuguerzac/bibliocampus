@@ -3,6 +3,7 @@ import { LibroCard } from '../libro-card/libro-card';
 import { Libro } from '../../modelos/libro';
 import { LIBROS } from '../../data/libros';
 import { LibroService } from '../../servicios/libro-service';
+import { PrestamoService } from '../../servicios/prestamo-service';
 
 @Component({
   selector: 'app-libro-lista',
@@ -12,6 +13,7 @@ import { LibroService } from '../../servicios/libro-service';
 })
 export class LibroLista {
   private libroService = inject(LibroService); // inyeccion de dependencias
+  private prestamoService = inject(PrestamoService);
 
   protected libros = signal<Libro[]>([]);
   protected terminoBusqueda = signal('');
@@ -43,10 +45,9 @@ export class LibroLista {
 
   protected alSolicitar(libro:Libro):void {
     // Actualizar las copias disponibles
-    this.libroService.descontarCopia(libro.id).subscribe(()=>{
+    this.prestamoService.solicitar(libro).subscribe(()=> {
       this.mensaje.set(`Solicitaste ${libro.titulo}`);
       this.cargar();
     })
-    
   }
 }
